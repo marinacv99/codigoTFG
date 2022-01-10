@@ -1,0 +1,113 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="FaceDetection.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FaceDetection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="TranslucentBlackBrush" Color="Black" Opacity="0.3"/>
+    </Page.Resources>
+
+    <Grid Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10,40"/>
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="MinHeight" Value="80"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource TranslucentBlackBrush}"/>
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            </Style>
+            <Style TargetType="Viewbox">
+                <Setter Property="MaxHeight" Value="40"/>
+                <Setter Property="MaxWidth" Value="40"/>
+            </Style>
+        </Grid.Resources>
+
+
+
+        <Image x:Name="backgroundImage" HorizontalAlignment="Left" Height="1789" Margin="-224,-728,0,0" VerticalAlignment="Top" Width="2688" Source="images/image.jpeg" RenderTransformOrigin="0.504,0.495" UseLayoutRounding="False" d:LayoutRounding="Auto" Visibility="Visible" Opacity="0.2" Stretch="Fill" Grid.RowSpan="2">
+            <Image.RenderTransform>
+                <CompositeTransform SkewX="1.072" TranslateX="-1.066"/>
+            </Image.RenderTransform>
+        </Image>
+        <Rectangle Stroke="Black" Opacity="0.7" Height="250"  Fill="White" Margin="720,11,55,33"/>
+
+        <Rectangle Stroke="Black" Opacity="1"  Height="25"  Fill="black" Margin="720,-217,55,33"/>
+        <Rectangle Stroke="Gray" Opacity="0.6"  Height="20" Width="260" Fill="CadetBlue" Margin="690,220,25,33"/>
+
+
+
+
+        <!--Camera preview-->
+        <CaptureElement Name="PreviewControl" Stretch="Uniform" Width="600"  Margin="-610,70,0,249"/>
+        <Border BorderThickness="3.5" BorderBrush="White"  Margin="-13,58,602,234"  Height="320" Width="605" Grid.RowSpan="3"></Border>
+
+        <!-- Capture + Record buttons -->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="100,318,980,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <StackPanel.RenderTransform>
+                <CompositeTransform Rotation="-90.0"/>
+            </StackPanel.RenderTransform>
+            <Button Name="PhotoButton" Click="PhotoButton_Click" IsEnabled="False" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <CompositeTransform Rotation="0.0"/>
+                </Button.RenderTransform>
+                <Viewbox>
+                    <SymbolIcon Symbol="Camera" RenderTransformOrigin="0.5,0.5">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform Rotation="90"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Viewbox>
+            </Button>
+
+            <Button Name="AudioButton" Click="AudioButton_Click" IsEnabled="False">
+                <Grid>
+                    <Ellipse x:Name="StartRecordingIcon" Fill="Red" Width="20" Height="20"/>
+                    <Rectangle x:Name="StopRecordingIcon" Fill="White" Width="20" Height="20" Visibility="Collapsed"/>
+                </Grid>
+            </Button>
+        </StackPanel>
+
+        <Button x:Name="button"  Click="Both_Click" Margin="450,438,0,0" VerticalAlignment="Top">
+            <Viewbox>
+                <SymbolIcon Symbol="ContactPresence" RenderTransformOrigin="0.5,0.5">
+                    <SymbolIcon.RenderTransform>
+                        <CompositeTransform Rotation="0"/>
+                    </SymbolIcon.RenderTransform>
+                </SymbolIcon>
+            </Viewbox>
+        </Button>
+
+        <!-- Show results -->
+        <MediaElement Visibility="Collapsed" x:Name="mediaElement" AreTransportControlsEnabled="True" HorizontalAlignment="Left" Height="95" Margin="802,250,0,0" VerticalAlignment="Top" Width="350">
+        </MediaElement>
+        <TextBlock x:Name="audioText" Text="" Foreground="Black" TextWrapping="Wrap"  Margin="719,403.5,50,120" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" Width="990"  FontWeight="Normal"/>
+        <TextBlock x:Name="output" Text="Prediction:" Foreground="White"   TextWrapping="Wrap" Margin="300,185,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Arial" Width="990"  FontWeight="Normal"/>
+        <Image x:Name="image" RenderTransformOrigin="0.53,0.521" Margin="780,70,0,110" Width="300" Height="220" HorizontalAlignment="Left" >
+            <Image.RenderTransform>
+                <CompositeTransform ScaleY="-1" Rotation="-180" TranslateX="9.273" TranslateY="-0.019"/>
+            </Image.RenderTransform>
+        </Image>
+        <TextBlock x:Name="imageText" Foreground="Black"  FontSize="15" Text="" HorizontalAlignment="Left"  FontFamily="Arial" Margin="855,403.5,20,110" Width="709" />
+
+
+    </Grid>
+</Page>
